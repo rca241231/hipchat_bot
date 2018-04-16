@@ -1,0 +1,18 @@
+service: hipchat-bot
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-west-2
+  environment:
+    HIPCHAT_TOKEN: ${env:HIPCHAT_TOKEN}
+
+functions:
+  post:
+    handler: handler.received
+    events:
+      - http:
+          path: deploybot
+          method: post
+          cors: true
